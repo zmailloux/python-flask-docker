@@ -24,4 +24,4 @@ resources:
 ingress:
   enabled: true
 
-basedomain: zach.zebra.engineering
+basedomain: jx.zebra.engineering
