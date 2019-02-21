@@ -21,6 +21,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: MONGO_HOST:
+          value: "{{ template "fullname" . }}-mongo:27017"
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         resources:

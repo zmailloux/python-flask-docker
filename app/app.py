@@ -1,5 +1,16 @@
 from flask import Flask,render_template
+from pymongo import MongoClient
+import os
 import socket
+
+MONGO_HOST = os.getenv('MONGO_HOST', 'localhost:27017')
+
+print("Trying to log into mongo...")
+myclient = MongoClient(MONGO_HOST, username="admin", password="test")
+print("Logged in...")
+
+print(myclient.get_database("my-database"))
+
 
 app = Flask(__name__)
 

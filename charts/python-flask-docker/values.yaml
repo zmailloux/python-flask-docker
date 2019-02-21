@@ -24,4 +24,11 @@ resources:
 ingress:
   enabled: true
 
+mongo:
+  enabled: true
+  mongodbRootPassword: "test"
+  mongodbUsername: "admin"
+  mongodbPassword: "test"
+  mongodbDatabase: "flask"
+
 basedomain: zach.zebra.engineering

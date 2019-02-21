@@ -4,4 +4,5 @@ dependencies:
   name: mongodb
   repository: https://kubernetes-charts.storage.googleapis.com/
   version: 5.4.0
+  condition: mongo.enabled
 
