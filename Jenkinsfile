@@ -3,7 +3,8 @@ pipeline {
     label "jenkins-python"
   }
   environment {
-    ORG = 'zmailloux'
+    DOCKER_REGISTRY = 'gcr.io'
+    ORG = 'es-devops-d'
     APP_NAME = 'python-flask-docker'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   }
@@ -13,6 +14,7 @@ pipeline {
         branch 'PR-*'
       }
       environment {
+        DOCKER_REGISTRY = "gcr.io"
         PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
         PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
         HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
