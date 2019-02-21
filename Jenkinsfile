@@ -3,8 +3,7 @@ pipeline {
     label "jenkins-python"
   }
   environment {
-    DOCKER_REGISTRY = 'gcr.io'
-    ORG = 'es-devops-d'
+    ORG = 'zmailloux'
     APP_NAME = 'python-flask-docker'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   }

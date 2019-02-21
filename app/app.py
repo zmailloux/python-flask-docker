@@ -5,14 +5,11 @@ import socket
 
 MONGO_HOST = os.getenv('MONGO_HOST', 'localhost:27017')
 
-print("Trying to log into mongo...")
-myclient = MongoClient(MONGO_HOST, username="admin", password="test")
-print("Logged in...")
-
-print(myclient.get_database("my-database"))
-
+print(f"Mongo Host: {MONGO_HOST}")
 
 app = Flask(__name__)
+
+myclient = MongoClient(MONGO_HOST)
 
 @app.route("/")
 def index():
@@ -31,5 +28,26 @@ def page_one(text):
     except:
         return render_template('error.html')
 
+
+@app.route("/add/<name>", methods=['GET'])
+def add_name(name):
+    namescol = myclient["flaskapp"]["names"]
+    x = namescol.insert({"name": name})
+    print(x)
+    return render_template('added.html', text=name)
+
+@app.route("/get", methods=['GET'])
+def get_names():
+    try:
+        print("hey")
+        flaskdb = myclient["flaskapp"]
+        namescol = flaskdb["names"]
+        names = namescol.find({})
+        print(names)
+        print([x for x in names])
+        return render_template('get.html', text=[x for x in names])
+    except:
+        return render_template('error.html')
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', debug=True, port=8080)
